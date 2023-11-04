@@ -30,7 +30,7 @@ function App() {
 		dragOverItem,
 	};
 
-	// handle drag sorting
+	// Reordering images after drag and drop
 	const handleSort = () => {
 		let _images = [...images];
 
