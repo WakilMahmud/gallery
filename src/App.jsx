@@ -1,7 +1,7 @@
-import { useRef, useState } from "react";
 import Header from "./components/Header";
 import Images from "./components/Images";
 import AddImage from "./components/AddImage";
+import { useRef, useState } from "react";
 
 function App() {
 	const imageData = [
@@ -32,7 +32,6 @@ function App() {
 
 	// handle drag sorting
 	const handleSort = () => {
-		//duplicate items
 		let _images = [...images];
 
 		//remove and save the dragged item content
@@ -48,15 +47,18 @@ function App() {
 		setImages(_images);
 	};
 
+	//insert the checked image into the SelectedImages
 	const checkedImage = (src) => {
 		const newSelectedImages = [...selectedImages, src];
 		setSelectedImages(newSelectedImages);
 	};
+	//remove the unchecked image from the SelectedImages
 	const uncheckedImage = (src) => {
 		const newSelectedImages = selectedImages.filter((selectedImage) => selectedImage != src);
 		setSelectedImages(newSelectedImages);
 	};
 
+	//remove the checked images from the UI
 	const deleteSelectedImages = () => {
 		const updatedImages = images.filter((image) => !selectedImages.includes(image));
 		setSelectedImages([]);
