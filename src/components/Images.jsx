@@ -1,4 +1,12 @@
+import { useState } from "react";
+
 const Images = ({ index, src, refs, handleSort }) => {
+	const [isChecked, setIsChecked] = useState(false);
+
+	const handleChecked = () => {
+		setIsChecked((prevIsChecked) => !prevIsChecked);
+	};
+
 	return (
 		<div
 			className={`${index == 0 && "col-span-2 row-span-2"}`}
@@ -11,7 +19,14 @@ const Images = ({ index, src, refs, handleSort }) => {
 			<label htmlFor={src} className="hover:cursor-pointer">
 				<div className={`relative rounded-lg border-2 hover:border-none`}>
 					<img src={src} alt="Image" className="rounded-lg w-full h-full" />
-					<div className={`absolute left-0 top-0 h-full w-full rounded-lg  hover:bg-gray-700 opacity-50`}></div>
+					<div className={`absolute left-0 top-0 h-full w-full rounded-lg  hover:bg-gray-700 opacity-50 ${isChecked ? "bg-gray-200" : ""}`}></div>
+					<input
+						type="checkbox"
+						name={src}
+						id={src}
+						className={`absolute left-8 top-8  w-4 h-4 hover:block ${isChecked ? "block" : "hidden"}`}
+						onClick={() => handleChecked(src)}
+					/>
 				</div>
 			</label>
 		</div>
