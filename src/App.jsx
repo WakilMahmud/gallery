@@ -2,6 +2,7 @@ import Header from "./components/Header";
 import Images from "./components/Images";
 import AddImage from "./components/AddImage";
 import { useRef, useState } from "react";
+import Spinner from "./components/Spinner";
 
 function App() {
 	const imageData = [
@@ -69,20 +70,24 @@ function App() {
 		<div className="flex justify-center">
 			<div className="w-4/5 border-none rounded-lg bg-white my-8">
 				<Header selectedImages={selectedImages} deleteSelectedImages={deleteSelectedImages}></Header>
-				<div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4 p-8 auto-rows-fr">
-					{images.map((image, index) => (
-						<Images
-							key={image}
-							index={index}
-							src={image}
-							refs={refs}
-							handleSort={handleSort}
-							checkedImage={checkedImage}
-							uncheckedImage={uncheckedImage}
-						></Images>
-					))}
-					<AddImage></AddImage>
-				</div>
+				{images?.length ? (
+					<div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4 p-8 auto-rows-fr">
+						{images.map((image, index) => (
+							<Images
+								key={image}
+								index={index}
+								src={image}
+								refs={refs}
+								handleSort={handleSort}
+								checkedImage={checkedImage}
+								uncheckedImage={uncheckedImage}
+							></Images>
+						))}
+						<AddImage></AddImage>
+					</div>
+				) : (
+					<Spinner></Spinner>
+				)}
 			</div>
 		</div>
 	);

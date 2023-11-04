@@ -24,10 +24,21 @@ const Images = ({ index, src, refs, handleSort, checkedImage, uncheckedImage }) 
 		<div
 			className={`${index == 0 && "col-span-2 row-span-2"}`}
 			draggable
-			onDragStart={() => (refs.dragItem.current = index)}
-			onDragEnter={() => (refs.dragOverItem.current = index)}
-			onDragEnd={handleSort}
-			onDragOver={(e) => e.preventDefault()}
+			onDragStart={(e) => {
+				e.target.style.opacity = 0.5;
+				refs.dragItem.current = index;
+			}}
+			onDragEnter={() => {
+				refs.dragOverItem.current = index;
+			}}
+			onDragOver={(e) => {
+				e.preventDefault();
+			}}
+			onDragEnd={(e) => {
+				e.preventDefault();
+				e.target.style.opacity = 1;
+				handleSort();
+			}}
 			onMouseEnter={handleMouseEnter}
 			onMouseLeave={handleMouseLeave}
 		>
