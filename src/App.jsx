@@ -19,6 +19,7 @@ function App() {
 	];
 
 	const [images, setImages] = useState(imageData);
+	const [selectedImages, setSelectedImages] = useState([]);
 
 	//save reference for dragItem and dragOverItem
 	const dragItem = useRef(null);
@@ -47,13 +48,31 @@ function App() {
 		setImages(_images);
 	};
 
+	const checkedImage = (src) => {
+		const newSelectedImages = [...selectedImages, src];
+		setSelectedImages(newSelectedImages);
+	};
+	const uncheckedImage = (src) => {
+		const newSelectedImages = selectedImages.filter((selectedImage) => selectedImage != src);
+		setSelectedImages(newSelectedImages);
+	};
+
 	return (
 		<div className="flex justify-center">
 			<div className="w-4/5 border-none rounded-lg bg-white my-8">
-				<Header></Header>
+				<Header selectedImages={selectedImages}></Header>
 				<div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4 p-8 auto-rows-fr">
 					{images.map((image, index) => (
-						<Images key={index} index={index} src={image} refs={refs} handleSort={handleSort}></Images>
+						<Images
+							key={index}
+							index={index}
+							src={image}
+							refs={refs}
+							handleSort={handleSort}
+							checkedImage={checkedImage}
+							uncheckedImage={uncheckedImage}
+							selectedImages={selectedImages}
+						></Images>
 					))}
 					<AddImage></AddImage>
 				</div>

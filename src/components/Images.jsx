@@ -1,7 +1,12 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
-const Images = ({ index, src, refs, handleSort }) => {
+const Images = ({ index, src, refs, handleSort, checkedImage, uncheckedImage, selectedImages }) => {
 	const [isChecked, setIsChecked] = useState(false);
+	const status = selectedImages.includes(src);
+
+	useEffect(() => {
+		isChecked ? checkedImage(src) : uncheckedImage(src);
+	}, [isChecked, src]);
 
 	const handleChecked = () => {
 		setIsChecked((prevIsChecked) => !prevIsChecked);
