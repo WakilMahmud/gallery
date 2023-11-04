@@ -1,4 +1,4 @@
-const Header = ({ selectedImages }) => {
+const Header = ({ selectedImages, deleteSelectedImages }) => {
 	return (
 		<>
 			{selectedImages?.length > 0 ? (
@@ -10,7 +10,9 @@ const Header = ({ selectedImages }) => {
 							{selectedImages.length == 1 ? <span> File</span> : <span> Files</span>} Selected
 						</p>
 					</div>
-					<button className="text-red-500">Delete files</button>
+					<button className="text-red-500" onClick={deleteSelectedImages}>
+						Delete files
+					</button>
 				</div>
 			) : (
 				<div className="border-b-2">

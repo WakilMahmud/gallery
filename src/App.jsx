@@ -57,10 +57,16 @@ function App() {
 		setSelectedImages(newSelectedImages);
 	};
 
+	const deleteSelectedImages = () => {
+		const updatedImages = images.filter((image) => !selectedImages.includes(image));
+		setSelectedImages([]);
+		setImages(updatedImages);
+	};
+
 	return (
 		<div className="flex justify-center">
 			<div className="w-4/5 border-none rounded-lg bg-white my-8">
-				<Header selectedImages={selectedImages}></Header>
+				<Header selectedImages={selectedImages} deleteSelectedImages={deleteSelectedImages}></Header>
 				<div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4 p-8 auto-rows-fr">
 					{images.map((image, index) => (
 						<Images
